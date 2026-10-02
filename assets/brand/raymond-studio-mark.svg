@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Raymond Studio mark</title>
+  <desc id="desc">A geometric R mark with a sharp diagonal cut, in Raymond Studio green on near-black.</desc>
+  <rect width="512" height="512" rx="112" fill="#03040c"/>
+  <path fill="#39ff14" d="M126 92h146c79 0 126 40 126 108 0 51-26 84-72 99l92 121h-96l-79-111h-46v111h-71V92Zm71 61v96h68c38 0 58-15 58-49 0-32-20-47-58-47h-68Z"/>
+  <path fill="#03040c" d="m238 296 52-52 128 128v48h-69L238 296Z"/>
+  <path fill="#39ff14" d="M334 354h84v66h-84z"/>
+</svg>
