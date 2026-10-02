@@ -1,0 +1,358 @@
+/* Two halves of one type composition. The page itself always scrolls normally. */
+.hero-story {
+  position: relative;
+  background: #03040c;
+  isolation: isolate;
+}
+
+.hero-story .hero-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  background: #03040c;
+}
+
+.hero-story .hero-doors {
+  position: relative;
+  order: -1;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-story .hero-door {
+  background: #03040c;
+}
+
+.hero-story .hero-door--right {
+  display: none;
+}
+
+.hero-story .door-composition {
+  min-height: 100svh;
+  padding: clamp(104px, 14svh, 144px) clamp(24px, 6.6vw, 116px)
+    clamp(36px, 5svh, 60px);
+  display: flex;
+  flex-direction: column;
+  color: #f4f4f0;
+}
+
+.hero-story .door-eyebrow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #a5a6b0;
+}
+
+.hero-story .door-name {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 28px 20px;
+  margin: 0 0 0 -0.065em;
+  font-size: min(16.9vw, 26svh);
+  line-height: 0.84;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+}
+
+.hero-story .door-name > span {
+  display: block;
+}
+
+.hero-story .door-name > span + span {
+  align-self: flex-end;
+  margin-top: 0.075em;
+  color: #39ff14;
+}
+
+.hero-story .door-role {
+  margin: 0;
+  font-size: clamp(22px, 3.25vw, 52px);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.045em;
+}
+
+.hero-story .door-tagline {
+  margin: 13px 0 0;
+  color: #a5a6b0;
+  font-size: clamp(13px, 1.2vw, 18px);
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+}
+
+.hero-story .door-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: clamp(28px, 5svh, 60px);
+  padding-top: 20px;
+  border-top: 1px solid #ffffff1c;
+  color: #898b96;
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 0.015em;
+}
+
+.hero-story .hero-reveal {
+  position: relative;
+  min-height: 100svh;
+  transform-origin: 50% 60%;
+}
+
+.hero-story.is-motion-ready {
+  height: 210svh;
+}
+
+.hero-story.is-motion-ready .hero-stage {
+  display: block;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+
+.hero-story.is-motion-ready .hero-doors {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-story.is-motion-ready .hero-door {
+  position: absolute;
+  inset-block: 0;
+  width: 50%;
+  overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.hero-story.is-motion-ready .hero-door--left {
+  left: 0;
+}
+
+.hero-story.is-motion-ready .hero-door--right {
+  display: block;
+  right: 0;
+}
+
+.hero-story.is-motion-ready .door-composition {
+  width: 200%;
+  height: 100svh;
+  min-height: 0;
+}
+
+.hero-story.is-motion-ready .hero-door--right .door-composition {
+  margin-left: -100%;
+}
+
+.hero-story.is-motion-ready .hero-reveal {
+  will-change: transform, opacity;
+}
+
+.hero-story .hero-open {
+  position: absolute;
+  z-index: 3;
+  right: max(184px, 10vw);
+  bottom: clamp(36px, 5svh, 60px);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #ffffff30;
+  border-radius: 50%;
+  padding: 0;
+  background: #03040c;
+  color: #f4f4f0;
+  font: inherit;
+  font-size: 17px;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.hero-story .hero-open:hover {
+  color: #39ff14;
+}
+.hero-story .hero-open:focus-visible {
+  outline: 2px solid #39ff14;
+  outline-offset: 5px;
+}
+.hero-story:not(.is-motion-ready) .hero-open {
+  display: none;
+}
+
+.hero-story .hero-progress {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  z-index: 3;
+  height: 1px;
+  background: #39ff14;
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+@media (min-width: 1800px) {
+  .hero-story .door-composition {
+    padding-inline: max(116px, calc((100vw - 1600px) / 2));
+  }
+  .hero-story .door-name {
+    font-size: min(300px, 26svh);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-story .door-composition {
+    padding: 118px 25px 105px;
+  }
+  .hero-story .door-eyebrow {
+    max-width: 260px;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 10px;
+  }
+  .hero-story .door-name {
+    font-size: 17.4vw;
+    line-height: 0.96;
+    margin-left: -0.065em;
+    padding-block: 50px 42px;
+  }
+  .hero-story .door-name > span + span {
+    margin-top: 0;
+  }
+  .hero-story .door-role {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+  .hero-story .door-tagline {
+    margin-top: 11px;
+    font-size: 14px;
+  }
+  .hero-story .door-bottom {
+    margin-top: 30px;
+    padding-top: 18px;
+    font-size: 10px;
+  }
+  .hero-story .hero-open {
+    right: 96px;
+    bottom: 90px;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 768px) {
+  .hero-story .door-composition {
+    padding-top: 100px;
+    padding-bottom: 28px;
+  }
+  .hero-story .door-name {
+    font-size: min(16.9vw, 23svh);
+    padding-block: 18px;
+  }
+  .hero-story .door-role {
+    font-size: 28px;
+  }
+  .hero-story .door-tagline {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  .hero-story .door-bottom {
+    margin-top: 22px;
+    padding-top: 12px;
+  }
+  .hero-story .hero-open {
+    bottom: 22px;
+  }
+}
+
+@media (max-height: 660px) and (max-width: 767px) {
+  .hero-story .door-composition {
+    padding-top: 96px;
+    padding-bottom: 85px;
+  }
+  .hero-story .door-name {
+    font-size: min(17.4vw, 21svh);
+    padding-block: 20px;
+  }
+  .hero-story .door-role {
+    font-size: 23px;
+  }
+  .hero-story .door-bottom {
+    margin-top: 20px;
+    padding-top: 12px;
+  }
+  .hero-story .hero-open {
+    bottom: 79px;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-story .door-composition {
+    padding: 84px 90px 92px;
+  }
+  .hero-story .door-eyebrow {
+    flex-direction: row;
+    max-width: none;
+    font-size: 9px;
+  }
+  .hero-story .door-name {
+    font-size: min(16.9vw, 18svh);
+    padding-block: 10px;
+  }
+  .hero-story .door-role {
+    font-size: 21px;
+  }
+  .hero-story .door-tagline {
+    margin-top: 6px;
+    font-size: 12px;
+  }
+  .hero-story .door-bottom {
+    display: none;
+  }
+  .hero-story .hero-open {
+    right: 90px;
+    bottom: 85px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-story.is-motion-ready {
+    height: auto;
+  }
+  .hero-story.is-motion-ready .hero-stage {
+    position: relative;
+    display: flex;
+    height: auto;
+  }
+  .hero-story.is-motion-ready .hero-doors,
+  .hero-story.is-motion-ready .hero-door {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    transform: none !important;
+  }
+  .hero-story.is-motion-ready .hero-door--right {
+    display: none;
+  }
+  .hero-story.is-motion-ready .door-composition {
+    width: 100%;
+    min-height: 100svh;
+    height: auto;
+  }
+  .hero-story .hero-reveal {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .hero-story .hero-open,
+  .hero-story .hero-progress {
+    display: none;
+  }
+}

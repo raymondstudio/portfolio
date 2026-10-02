@@ -1,0 +1,244 @@
+/* One set of contact links, moving between its page position and the viewport. */
+#contact-dock {
+  position: relative;
+  min-height: 380px;
+  width: 100%;
+}
+
+.contact-rail {
+  --contact-ink: #f2f3ee;
+  --contact-muted: #a4a7ad;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-rail .contact-method {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 20px;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 16px;
+  align-items: center;
+  width: 100%;
+  min-height: 68px;
+  box-sizing: border-box;
+  padding: 12px 17px;
+  color: var(--contact-ink);
+  border: 1px solid rgb(255 255 255 / 13%);
+  border-radius: 10px;
+  background: #0c0e15;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.contact-rail .contact-method > i,
+.contact-rail .contact-method > svg {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  justify-self: center;
+  width: 22px;
+  font-size: 21px;
+  text-align: center;
+}
+
+.contact-rail .contact-method__label {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.contact-rail .contact-method__hint {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--contact-muted);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.contact-rail .contact-method::after {
+  content: "↗";
+  grid-column: 3;
+  grid-row: 1 / 3;
+  color: var(--contact-muted);
+  font-size: 21px;
+  transition:
+    transform 220ms ease,
+    color 220ms ease;
+}
+
+.contact-rail .contact-method:hover,
+.contact-rail .contact-method:focus-visible {
+  border-color: var(--accent, #39ff14);
+  background: #101811;
+  color: var(--accent, #39ff14);
+}
+
+.contact-rail .contact-method:hover::after,
+.contact-rail .contact-method:focus-visible::after {
+  color: var(--accent, #39ff14);
+  transform: translate(2px, -2px);
+}
+
+.contact-rail .contact-method:focus-visible {
+  outline: 2px solid var(--accent, #39ff14);
+  outline-offset: 4px;
+}
+
+.contact-rail.is-floating {
+  position: fixed;
+  z-index: 70;
+  top: 50%;
+  left: 20px;
+  width: 48px;
+  transform: translateY(-50%);
+}
+
+.contact-rail.is-floating .contact-method {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  min-height: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  background: #0c0e15;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 15%);
+}
+
+.contact-rail.is-floating .contact-method::after {
+  display: none;
+}
+
+.contact-rail.is-floating .contact-method__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.contact-rail.is-floating .contact-method__hint {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 14px);
+  width: max-content;
+  max-width: 220px;
+  padding: 10px 14px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 7px;
+  background: #10131b;
+  color: var(--contact-ink);
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(5px, -50%);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    visibility 160ms;
+}
+
+.contact-rail.is-floating .contact-method:hover .contact-method__hint,
+.contact-rail.is-floating .contact-method:focus-visible .contact-method__hint {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, -50%);
+}
+
+.contact-rail.is-travelling .contact-method__hint {
+  visibility: hidden;
+}
+
+@media (max-width: 767px), (max-height: 550px) {
+  #contact-dock {
+    min-height: 364px;
+  }
+
+  .contact-rail:not(.is-floating) {
+    gap: 6px;
+  }
+
+  .contact-rail .contact-method {
+    column-gap: 12px;
+    padding-inline: 14px;
+  }
+
+  .contact-rail.is-floating {
+    top: auto;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    left: 12px;
+    flex-direction: row;
+    gap: 2px;
+    width: 238px;
+    padding: 4px;
+    border: 1px solid rgb(255 255 255 / 16%);
+    border-radius: 32px;
+    background: #080a11;
+    box-sizing: border-box;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 35%);
+    transform: none;
+  }
+
+  .contact-rail.is-floating .contact-method {
+    flex: 0 0 44px;
+    width: 44px;
+    min-height: 44px;
+    height: 44px;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .contact-rail.is-floating .contact-method > i,
+  .contact-rail.is-floating .contact-method > svg {
+    font-size: 19px;
+    width: 20px;
+  }
+
+  .contact-rail.is-floating .contact-method__hint {
+    top: auto;
+    bottom: calc(100% + 14px);
+    left: 0;
+    max-width: 210px;
+    transform: translateY(4px);
+  }
+
+  .contact-rail.is-floating
+    .contact-method:nth-child(n + 4)
+    .contact-method__hint {
+    right: 0;
+    left: auto;
+  }
+
+  .contact-rail.is-floating .contact-method:hover .contact-method__hint,
+  .contact-rail.is-floating
+    .contact-method:focus-visible
+    .contact-method__hint {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-rail .contact-method,
+  .contact-rail .contact-method::after,
+  .contact-rail .contact-method__hint {
+    transition: none;
+  }
+}

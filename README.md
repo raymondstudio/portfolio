@@ -1,4 +1,12 @@
 
+## Local development
+
+Run `npm install`, then `npm run dev`. The portfolio is served at `http://127.0.0.1:4173`.
+
+Run `npm test` for Chrome browser checks covering responsive layouts, accessibility, hero motion, project previews, contact docking, reduced motion, and mocked form submissions. Chrome must be installed. Tests never send real messages.
+
+The homepage is static HTML, CSS, and JavaScript. Hero and contact animation code is isolated in `assets/js/hero.js` and `assets/js/contact-dock.js`. The existing `server.js` is the separate AI proxy used by earlier project pages; it is not required for the homepage preview.
+
 <p align="center">
   <img src="./assets/images/profile-banner.png" alt="Raymond Iorliam — Full-Stack Developer" width="100%" />
 </p>
